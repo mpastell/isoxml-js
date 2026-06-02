@@ -1,6 +1,6 @@
 import { readFileSync, writeFileSync } from 'fs'
 import { join } from 'path'
-import { ISOXMLManager, TAGS, TaskTaskStatusEnum, ExtendedTask, ExtendedPartfield, ProcessDataVariable, Product, ValuePresentation } from 'isoxml'
+import { ISOXMLManager, TAGS, TaskTaskStatusEnum, ExtendedTask, ExtendedPartfield, ProcessDataVariable, Product, ValuePresentation, ProductProductTypeEnum } from 'isoxml'
 
 const isoxmlManager = new ISOXMLManager()
 
@@ -12,17 +12,22 @@ const task = isoxmlManager.createEntityFromAttributes(TAGS.Task, {
 
 const geoJSONdata = JSON.parse(readFileSync(join(__dirname, '../data/test.geojson'), 'utf-8'))
 
-const product = isoxmlManager.createEntityFromAttributes<Product>(TAGS.Product, {
-    ProductDesignator: 'Test Product'
-})
-const productRef = isoxmlManager.registerEntity(product)
-
 const valuePresentation = isoxmlManager.createEntityFromAttributes<ValuePresentation>(TAGS.ValuePresentation, {
     Offset: 0,
     Scale: 0.01,
-    NumberOfDecimals: 2
+    NumberOfDecimals: 2,
+    UnitDesignator: "kg/ha"    
 })
+
 const valuePresentationRef = isoxmlManager.registerEntity(valuePresentation)
+
+const product = isoxmlManager.createEntityFromAttributes<Product>(TAGS.Product, {
+    ProductDesignator: 'Test Product',
+    QuantityDDI : '0001',
+    ProductType : ProductProductTypeEnum.SingleDefault
+})
+
+const productRef = isoxmlManager.registerEntity(product)
 
 const doseVariable = isoxmlManager.createEntityFromAttributes<ProcessDataVariable>(
     TAGS.ProcessDataVariable,
