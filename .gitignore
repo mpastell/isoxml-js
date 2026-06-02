@@ -3,3 +3,6 @@
 /dist_es
 /coverage
 /.vscode
+TASKDATA
+isoxml.zip
+.DS_Store

@@ -33,6 +33,7 @@
   "dependencies": {
     "@turf/turf": "^6.4.0",
     "fast-xml-parser": "^4.3.1",
+    "isoxml": "^1.11.2",
     "jszip": "^3.10.1",
     "polygon-clipping": "^0.15.3",
     "rbush": "^3.0.1"
